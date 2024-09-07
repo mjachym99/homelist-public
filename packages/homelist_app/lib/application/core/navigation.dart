@@ -27,22 +27,6 @@ class NavigationService {
     _router = _createRouter(auth: auth, signUp: signUp);
   }
 
-  static FutureOr<String?> _redirect(
-    BuildContext context,
-    GoRouterState state, {
-    required bool auth,
-    required bool signUp,
-  }) {
-    if (signUp) {
-      return SignUpScreen.routeName;
-    }
-    if (auth) {
-      return null;
-    } else {
-      return LoginScreen.routeName;
-    }
-  }
-
   static GoRouter _createRouter({
     required bool auth,
     required bool signUp,
@@ -59,6 +43,22 @@ class NavigationService {
       },
       routes: allRoutes,
     );
+  }
+
+  static FutureOr<String?> _redirect(
+    BuildContext context,
+    GoRouterState state, {
+    required bool auth,
+    required bool signUp,
+  }) {
+    if (signUp) {
+      return SignUpScreen.routeName;
+    }
+    if (auth) {
+      return null;
+    } else {
+      return LoginScreen.routeName;
+    }
   }
 
   static final allRoutes = [

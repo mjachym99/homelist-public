@@ -8,7 +8,7 @@
       "name": "Homelist Debug",
       "request": "launch",
       "type": "dart",
-      "program": "./packages/homelist/lib/main.dart"
+      "program": "./packages/homelist_app/lib/main.dart"
     },
     {
       "name": "homelist (profile mode)",
