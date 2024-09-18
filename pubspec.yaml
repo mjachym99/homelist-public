@@ -1,7 +1,8 @@
 name: homelist_monorepo
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: 3.5.3
+  flutter: 3.24.3
 dev_dependencies:
   melos: ^4.0.0
   very_good_analysis: ^5.1.0
