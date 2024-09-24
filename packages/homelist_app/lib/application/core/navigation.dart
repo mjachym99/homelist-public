@@ -22,14 +22,12 @@ class NavigationService {
 
   static void initRouter({
     required bool auth,
-    required bool signUp,
   }) {
-    _router = _createRouter(auth: auth, signUp: signUp);
+    _router = _createRouter(auth: auth);
   }
 
   static GoRouter _createRouter({
     required bool auth,
-    required bool signUp,
   }) {
     return GoRouter(
       navigatorKey: _rootNavigatorKey,
@@ -38,7 +36,6 @@ class NavigationService {
           context,
           state,
           auth: auth,
-          signUp: signUp,
         );
       },
       routes: allRoutes,
@@ -49,13 +46,12 @@ class NavigationService {
     BuildContext context,
     GoRouterState state, {
     required bool auth,
-    required bool signUp,
   }) {
     if (auth) {
       return null;
     } else {
       switch (state.matchedLocation) {
-        case "/sign-up":
+        case '/sign-up':
           return SignUpScreen.routeName;
         default:
           return '/login';
@@ -70,9 +66,8 @@ class NavigationService {
         error.toString(),
       ),
       behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         left: 16,
-        top: 0,
         right: 16,
         bottom: 16,
       ),

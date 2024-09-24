@@ -19,7 +19,6 @@ mixin _$AuthState {
   bool get isAuthenticated => throw _privateConstructorUsedError;
   bool get staySignedIn => throw _privateConstructorUsedError;
   Status get authStatus => throw _privateConstructorUsedError;
-  bool get signUp => throw _privateConstructorUsedError;
   AuthRepositoryException? get authException =>
       throw _privateConstructorUsedError;
 
@@ -39,7 +38,6 @@ abstract class $AuthStateCopyWith<$Res> {
       {bool isAuthenticated,
       bool staySignedIn,
       Status authStatus,
-      bool signUp,
       AuthRepositoryException? authException});
 }
 
@@ -61,7 +59,6 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? isAuthenticated = null,
     Object? staySignedIn = null,
     Object? authStatus = null,
-    Object? signUp = null,
     Object? authException = freezed,
   }) {
     return _then(_value.copyWith(
@@ -77,10 +74,6 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.authStatus
           : authStatus // ignore: cast_nullable_to_non_nullable
               as Status,
-      signUp: null == signUp
-          ? _value.signUp
-          : signUp // ignore: cast_nullable_to_non_nullable
-              as bool,
       authException: freezed == authException
           ? _value.authException
           : authException // ignore: cast_nullable_to_non_nullable
@@ -101,7 +94,6 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       {bool isAuthenticated,
       bool staySignedIn,
       Status authStatus,
-      bool signUp,
       AuthRepositoryException? authException});
 }
 
@@ -121,7 +113,6 @@ class __$$AuthStateImplCopyWithImpl<$Res>
     Object? isAuthenticated = null,
     Object? staySignedIn = null,
     Object? authStatus = null,
-    Object? signUp = null,
     Object? authException = freezed,
   }) {
     return _then(_$AuthStateImpl(
@@ -137,10 +128,6 @@ class __$$AuthStateImplCopyWithImpl<$Res>
           ? _value.authStatus
           : authStatus // ignore: cast_nullable_to_non_nullable
               as Status,
-      signUp: null == signUp
-          ? _value.signUp
-          : signUp // ignore: cast_nullable_to_non_nullable
-              as bool,
       authException: freezed == authException
           ? _value.authException
           : authException // ignore: cast_nullable_to_non_nullable
@@ -156,7 +143,6 @@ class _$AuthStateImpl implements _AuthState {
       {required this.isAuthenticated,
       required this.staySignedIn,
       required this.authStatus,
-      required this.signUp,
       this.authException});
 
   @override
@@ -166,13 +152,11 @@ class _$AuthStateImpl implements _AuthState {
   @override
   final Status authStatus;
   @override
-  final bool signUp;
-  @override
   final AuthRepositoryException? authException;
 
   @override
   String toString() {
-    return 'AuthState(isAuthenticated: $isAuthenticated, staySignedIn: $staySignedIn, authStatus: $authStatus, signUp: $signUp, authException: $authException)';
+    return 'AuthState(isAuthenticated: $isAuthenticated, staySignedIn: $staySignedIn, authStatus: $authStatus, authException: $authException)';
   }
 
   @override
@@ -186,14 +170,13 @@ class _$AuthStateImpl implements _AuthState {
                 other.staySignedIn == staySignedIn) &&
             (identical(other.authStatus, authStatus) ||
                 other.authStatus == authStatus) &&
-            (identical(other.signUp, signUp) || other.signUp == signUp) &&
             (identical(other.authException, authException) ||
                 other.authException == authException));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isAuthenticated, staySignedIn,
-      authStatus, signUp, authException);
+  int get hashCode => Object.hash(
+      runtimeType, isAuthenticated, staySignedIn, authStatus, authException);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -209,7 +192,6 @@ abstract class _AuthState implements AuthState {
       {required final bool isAuthenticated,
       required final bool staySignedIn,
       required final Status authStatus,
-      required final bool signUp,
       final AuthRepositoryException? authException}) = _$AuthStateImpl;
 
   @override
@@ -218,8 +200,6 @@ abstract class _AuthState implements AuthState {
   bool get staySignedIn;
   @override
   Status get authStatus;
-  @override
-  bool get signUp;
   @override
   AuthRepositoryException? get authException;
 

@@ -16,8 +16,6 @@ class AuthCubit extends Cubit<AuthState> {
             isAuthenticated: false,
             authStatus: Status.initial,
             staySignedIn: false,
-            signUp: false,
-            authException: null,
           ),
         ) {
     _firebaseUserStreamSubscription = _authRepository.userStream.listen(
@@ -26,7 +24,6 @@ class AuthCubit extends Cubit<AuthState> {
           emit(
             state.copyWith(
               isAuthenticated: false,
-              signUp: false,
               authStatus: Status.initial,
             ),
           );
@@ -76,7 +73,6 @@ class AuthCubit extends Cubit<AuthState> {
       state.copyWith(
         isAuthenticated: true,
         authStatus: Status.loaded,
-        signUp: false,
       ),
     );
   }
@@ -110,14 +106,6 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
     _firebaseUserStreamSubscription.cancel();
-  }
-
-  void signUp() {
-    emit(state.copyWith(signUp: true));
-  }
-
-  void removeSignUp() {
-    emit(state.copyWith(signUp: false));
   }
 
   Future<void> createUserWithEmailAndPassword({

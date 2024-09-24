@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/src/router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homelist/application/auth/auth_cubit.dart';
 import 'package:homelist/application/bottom_nav/bottom_nav_cubit.dart';
 import 'package:homelist/application/budget/budget_cubit.dart';
@@ -54,9 +54,6 @@ class HomeList extends StatelessWidget {
           NavigationService.initRouter(
             auth: context.select<AuthCubit, bool>(
               (AuthCubit cubit) => cubit.state.authStatus == Status.loaded,
-            ),
-            signUp: context.select<AuthCubit, bool>(
-              (AuthCubit cubit) => cubit.state.signUp,
             ),
           );
           final GoRouter router = NavigationService.router;
