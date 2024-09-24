@@ -8,8 +8,8 @@ part of 'list.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SharedList _$$_SharedListFromJson(Map<String, dynamic> json) =>
-    _$_SharedList(
+_$SharedListImpl _$$SharedListImplFromJson(Map<String, dynamic> json) =>
+    _$SharedListImpl(
       id: json['id'] as String?,
       ownerId: json['ownerId'] as String,
       title: json['title'] as String,
@@ -23,7 +23,7 @@ _$_SharedList _$$_SharedListFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_SharedListToJson(_$_SharedList instance) =>
+Map<String, dynamic> _$$SharedListImplToJson(_$SharedListImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'ownerId': instance.ownerId,

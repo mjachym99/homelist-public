@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homelist/application/auth/auth_cubit.dart';
 import 'package:homelist/application/auth/auth_state.dart';
+import 'package:homelist/application/core/navigation.dart';
 import 'package:homelist/application/core/preferences.dart';
 import 'package:homelist/application/status.dart';
+import 'package:homelist/presentation/screens/login/sign_up_screen.dart';
+import 'package:homelist/repositories/auth/auth_repository.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -115,9 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             value: state.staySignedIn,
                             onChanged: (value) {
                               if (value != null) {
-                                context
-                                    .read<AuthCubit>()
-                                    .setStaySignedIn(value: value);
+                                context.read<AuthCubit>().setStaySignedIn(value: value);
                               }
                             },
                           );
@@ -149,7 +151,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   }
                 },
-                child: BlocBuilder<AuthCubit, AuthState>(
+                child: BlocConsumer<AuthCubit, AuthState>(
+                  listenWhen: (previous, current) {
+                    // Don't listen when the user changes remembering credentials
+                    return previous.staySignedIn == current.staySignedIn;
+                  },
+                  listener: (context, state) {
+                    if (state.authStatus == Status.error)
+                      NavigationService.showErrorSnackbar(
+                        context,
+                        state.authException?.error,
+                      );
+                  },
                   builder: (context, state) {
                     return Row(
                       mainAxisSize: MainAxisSize.min,
@@ -179,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  context.read<AuthCubit>().signUp();
+                  context.go(SignUpScreen.routeName);
                 },
                 child: Text(
                   'Sign Up',

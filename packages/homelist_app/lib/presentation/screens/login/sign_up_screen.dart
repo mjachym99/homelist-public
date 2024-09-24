@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homelist/application/auth/auth_cubit.dart';
+import 'package:homelist/application/core/navigation.dart';
 import 'package:homelist/presentation/constants.dart';
+import 'package:homelist/presentation/screens/login/log_in_screen.dart';
 import 'package:homelist/presentation/widgets/common/homelist_appbar.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -35,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         title: "Sign Up",
         leading: IconButton(
           onPressed: () {
-            context.read<AuthCubit>().removeSignUp();
+            context.go(LoginScreen.routeName);
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -66,8 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 24,
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
                 child: TextFormField(
                   controller: _firstNameController,
                   validator: (value) {
@@ -85,8 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
                 child: TextFormField(
                   controller: _lastNameController,
                   validator: (value) {
@@ -104,8 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
                 child: TextFormField(
                   controller: _emailController,
                   validator: (value) {
@@ -123,8 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
                 child: TextFormField(
                   controller: _passwordController,
                   validator: (value) {
@@ -142,8 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
                 child: TextFormField(
                   controller: _repeatPasswordController,
                   validator: (value) {
@@ -172,9 +170,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            context
-                                .read<AuthCubit>()
-                                .createUserWithEmailAndPassword(
+                            context.read<AuthCubit>().createUserWithEmailAndPassword(
                                   email: _emailController.text,
                                   password: _passwordController.text,
                                   firstName: _firstNameController.text,

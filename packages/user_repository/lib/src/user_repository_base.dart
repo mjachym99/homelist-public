@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:user_repository/user_repository.dart';
 
 abstract class UsersRepositoryGeneralFailure implements Exception {
@@ -42,7 +43,7 @@ class UsersRepository {
     }
   }
 
-  Future<void> getUserData(String uid) async {
+  Future<Either<UsersRepositoryGeneralFailure, void>> getUserData(String uid) async {
     try {
       final DocumentReference<Map<String, dynamic>> ref = _usersCollection.doc(uid);
       final DocumentSnapshot<Map<String, dynamic>> userRef = await ref.get();
@@ -53,8 +54,9 @@ class UsersRepository {
           UserData.fromJson(userData),
         );
       }
-    } catch (error, stackTrace) {
-      Error.throwWithStackTrace(GetUserDataFailure(error), stackTrace);
+      return const Right(null);
+    } catch (error) {
+      return Left(GetUserDataFailure(error));
     }
   }
 

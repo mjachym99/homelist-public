@@ -1,6 +1,6 @@
 {
-    "name": "homelist",
-    "short_name": "homelist",
+    "name": "homelist_app",
+    "short_name": "homelist_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -61,6 +61,22 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "environment"
+
+    productFlavors {
+        prod {
+            dimension "environment"
+            resValue "string", "homelist_prod", "Homelist Production App"
+            applicationIdSuffix ".prod"
+        }
+
+        dev {
+            dimension "environment"
+            resValue "string", "homelist_dev", "Homelist Development App"
+            applicationIdSuffix ".dev"
+        }
+    }
 }
 
 flutter {

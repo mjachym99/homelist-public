@@ -12,7 +12,7 @@ part of 'expense.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Expense _$ExpenseFromJson(Map<String, dynamic> json) {
   return _Expense.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$Expense {
   List<String> get borrowerIds => throw _privateConstructorUsedError;
   String get expenseGroupId => throw _privateConstructorUsedError;
 
+  /// Serializes this Expense to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Expense
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ExpenseCopyWith<Expense> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -56,6 +60,8 @@ class _$ExpenseCopyWithImpl<$Res, $Val extends Expense>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Expense
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -96,10 +102,10 @@ class _$ExpenseCopyWithImpl<$Res, $Val extends Expense>
 }
 
 /// @nodoc
-abstract class _$$_ExpenseCopyWith<$Res> implements $ExpenseCopyWith<$Res> {
-  factory _$$_ExpenseCopyWith(
-          _$_Expense value, $Res Function(_$_Expense) then) =
-      __$$_ExpenseCopyWithImpl<$Res>;
+abstract class _$$ExpenseImplCopyWith<$Res> implements $ExpenseCopyWith<$Res> {
+  factory _$$ExpenseImplCopyWith(
+          _$ExpenseImpl value, $Res Function(_$ExpenseImpl) then) =
+      __$$ExpenseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,12 +118,15 @@ abstract class _$$_ExpenseCopyWith<$Res> implements $ExpenseCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ExpenseCopyWithImpl<$Res>
-    extends _$ExpenseCopyWithImpl<$Res, _$_Expense>
-    implements _$$_ExpenseCopyWith<$Res> {
-  __$$_ExpenseCopyWithImpl(_$_Expense _value, $Res Function(_$_Expense) _then)
+class __$$ExpenseImplCopyWithImpl<$Res>
+    extends _$ExpenseCopyWithImpl<$Res, _$ExpenseImpl>
+    implements _$$ExpenseImplCopyWith<$Res> {
+  __$$ExpenseImplCopyWithImpl(
+      _$ExpenseImpl _value, $Res Function(_$ExpenseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Expense
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,7 +137,7 @@ class __$$_ExpenseCopyWithImpl<$Res>
     Object? borrowerIds = null,
     Object? expenseGroupId = null,
   }) {
-    return _then(_$_Expense(
+    return _then(_$ExpenseImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -159,8 +168,8 @@ class __$$_ExpenseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Expense implements _Expense {
-  _$_Expense(
+class _$ExpenseImpl implements _Expense {
+  _$ExpenseImpl(
       {required this.id,
       required this.title,
       required this.amount,
@@ -169,8 +178,8 @@ class _$_Expense implements _Expense {
       required this.expenseGroupId})
       : _borrowerIds = borrowerIds;
 
-  factory _$_Expense.fromJson(Map<String, dynamic> json) =>
-      _$$_ExpenseFromJson(json);
+  factory _$ExpenseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ExpenseImplFromJson(json);
 
   @override
   final String id;
@@ -197,10 +206,10 @@ class _$_Expense implements _Expense {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Expense &&
+            other is _$ExpenseImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.amount, amount) || other.amount == amount) &&
@@ -212,20 +221,22 @@ class _$_Expense implements _Expense {
                 other.expenseGroupId == expenseGroupId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, amount, lenderId,
       const DeepCollectionEquality().hash(_borrowerIds), expenseGroupId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Expense
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ExpenseCopyWith<_$_Expense> get copyWith =>
-      __$$_ExpenseCopyWithImpl<_$_Expense>(this, _$identity);
+  _$$ExpenseImplCopyWith<_$ExpenseImpl> get copyWith =>
+      __$$ExpenseImplCopyWithImpl<_$ExpenseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ExpenseToJson(
+    return _$$ExpenseImplToJson(
       this,
     );
   }
@@ -238,9 +249,9 @@ abstract class _Expense implements Expense {
       required final double amount,
       required final String lenderId,
       required final List<String> borrowerIds,
-      required final String expenseGroupId}) = _$_Expense;
+      required final String expenseGroupId}) = _$ExpenseImpl;
 
-  factory _Expense.fromJson(Map<String, dynamic> json) = _$_Expense.fromJson;
+  factory _Expense.fromJson(Map<String, dynamic> json) = _$ExpenseImpl.fromJson;
 
   @override
   String get id;
@@ -254,8 +265,11 @@ abstract class _Expense implements Expense {
   List<String> get borrowerIds;
   @override
   String get expenseGroupId;
+
+  /// Create a copy of Expense
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_ExpenseCopyWith<_$_Expense> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ExpenseImplCopyWith<_$ExpenseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

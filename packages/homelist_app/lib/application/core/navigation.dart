@@ -51,14 +51,34 @@ class NavigationService {
     required bool auth,
     required bool signUp,
   }) {
-    if (signUp) {
-      return SignUpScreen.routeName;
-    }
     if (auth) {
       return null;
     } else {
-      return LoginScreen.routeName;
+      switch (state.matchedLocation) {
+        case "/sign-up":
+          return SignUpScreen.routeName;
+        default:
+          return '/login';
+      }
     }
+  }
+
+  static void showErrorSnackbar(BuildContext context, Object? error) {
+    final snackBar = SnackBar(
+      backgroundColor: AppColors.debtRed,
+      content: Text(
+        error.toString(),
+      ),
+      behavior: SnackBarBehavior.floating,
+      margin: EdgeInsets.only(
+        left: 16,
+        top: 0,
+        right: 16,
+        bottom: 16,
+      ),
+    );
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   static final allRoutes = [

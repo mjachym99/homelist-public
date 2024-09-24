@@ -12,7 +12,7 @@ part of 'list.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SharedList _$SharedListFromJson(Map<String, dynamic> json) {
   return _SharedList.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$SharedList {
   ListType get type => throw _privateConstructorUsedError;
   List<String> get allowedUsersIds => throw _privateConstructorUsedError;
 
+  /// Serializes this SharedList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SharedListCopyWith<SharedList> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$SharedListCopyWithImpl<$Res, $Val extends SharedList>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,11 +104,11 @@ class _$SharedListCopyWithImpl<$Res, $Val extends SharedList>
 }
 
 /// @nodoc
-abstract class _$$_SharedListCopyWith<$Res>
+abstract class _$$SharedListImplCopyWith<$Res>
     implements $SharedListCopyWith<$Res> {
-  factory _$$_SharedListCopyWith(
-          _$_SharedList value, $Res Function(_$_SharedList) then) =
-      __$$_SharedListCopyWithImpl<$Res>;
+  factory _$$SharedListImplCopyWith(
+          _$SharedListImpl value, $Res Function(_$SharedListImpl) then) =
+      __$$SharedListImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,13 +121,15 @@ abstract class _$$_SharedListCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SharedListCopyWithImpl<$Res>
-    extends _$SharedListCopyWithImpl<$Res, _$_SharedList>
-    implements _$$_SharedListCopyWith<$Res> {
-  __$$_SharedListCopyWithImpl(
-      _$_SharedList _value, $Res Function(_$_SharedList) _then)
+class __$$SharedListImplCopyWithImpl<$Res>
+    extends _$SharedListCopyWithImpl<$Res, _$SharedListImpl>
+    implements _$$SharedListImplCopyWith<$Res> {
+  __$$SharedListImplCopyWithImpl(
+      _$SharedListImpl _value, $Res Function(_$SharedListImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,7 +140,7 @@ class __$$_SharedListCopyWithImpl<$Res>
     Object? type = null,
     Object? allowedUsersIds = null,
   }) {
-    return _then(_$_SharedList(
+    return _then(_$SharedListImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -163,8 +171,8 @@ class __$$_SharedListCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SharedList implements _SharedList {
-  _$_SharedList(
+class _$SharedListImpl implements _SharedList {
+  _$SharedListImpl(
       {this.id,
       required this.ownerId,
       required this.title,
@@ -174,8 +182,8 @@ class _$_SharedList implements _SharedList {
       : _items = items,
         _allowedUsersIds = allowedUsersIds;
 
-  factory _$_SharedList.fromJson(Map<String, dynamic> json) =>
-      _$$_SharedListFromJson(json);
+  factory _$SharedListImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SharedListImplFromJson(json);
 
   @override
   final String? id;
@@ -207,10 +215,10 @@ class _$_SharedList implements _SharedList {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SharedList &&
+            other is _$SharedListImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.title, title) || other.title == title) &&
@@ -220,7 +228,7 @@ class _$_SharedList implements _SharedList {
                 .equals(other._allowedUsersIds, _allowedUsersIds));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -231,15 +239,17 @@ class _$_SharedList implements _SharedList {
       type,
       const DeepCollectionEquality().hash(_allowedUsersIds));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SharedListCopyWith<_$_SharedList> get copyWith =>
-      __$$_SharedListCopyWithImpl<_$_SharedList>(this, _$identity);
+  _$$SharedListImplCopyWith<_$SharedListImpl> get copyWith =>
+      __$$SharedListImplCopyWithImpl<_$SharedListImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SharedListToJson(
+    return _$$SharedListImplToJson(
       this,
     );
   }
@@ -252,10 +262,10 @@ abstract class _SharedList implements SharedList {
       required final String title,
       required final List<ListItem?> items,
       required final ListType type,
-      required final List<String> allowedUsersIds}) = _$_SharedList;
+      required final List<String> allowedUsersIds}) = _$SharedListImpl;
 
   factory _SharedList.fromJson(Map<String, dynamic> json) =
-      _$_SharedList.fromJson;
+      _$SharedListImpl.fromJson;
 
   @override
   String? get id;
@@ -269,8 +279,11 @@ abstract class _SharedList implements SharedList {
   ListType get type;
   @override
   List<String> get allowedUsersIds;
+
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_SharedListCopyWith<_$_SharedList> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SharedListImplCopyWith<_$SharedListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

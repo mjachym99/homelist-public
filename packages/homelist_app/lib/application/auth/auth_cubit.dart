@@ -17,6 +17,7 @@ class AuthCubit extends Cubit<AuthState> {
             authStatus: Status.initial,
             staySignedIn: false,
             signUp: false,
+            authException: null,
           ),
         ) {
     _firebaseUserStreamSubscription = _authRepository.userStream.listen(
@@ -50,9 +51,22 @@ class AuthCubit extends Cubit<AuthState> {
     emit(
       state.copyWith(authStatus: Status.loading),
     );
-    await _authRepository.logIn(
+    final result = await _authRepository.logIn(
       email: email,
       password: password,
+    );
+
+    // _firebaseUserStreamSubscription callback handles succesful login
+    return result.fold(
+      (exception) {
+        emit(
+          state.copyWith(
+            authException: exception,
+            authStatus: Status.error,
+          ),
+        );
+      },
+      (_) {},
     );
   }
 
@@ -83,8 +97,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void setStaySignedIn({required bool value}) {
-    PreferencesController.preferencesInstance
-        .setBool(_staySignedInPrefsKey, value);
+    PreferencesController.preferencesInstance.setBool(_staySignedInPrefsKey, value);
     emit(state.copyWith(staySignedIn: value));
   }
 

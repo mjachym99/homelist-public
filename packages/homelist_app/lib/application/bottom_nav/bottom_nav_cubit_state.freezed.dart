@@ -12,13 +12,15 @@ part of 'bottom_nav_cubit_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BottomNavCubitState {
   int get currentPageIndex => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BottomNavCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BottomNavCubitStateCopyWith<BottomNavCubitState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$BottomNavCubitStateCopyWithImpl<$Res, $Val extends BottomNavCubitState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BottomNavCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -57,30 +61,32 @@ class _$BottomNavCubitStateCopyWithImpl<$Res, $Val extends BottomNavCubitState>
 }
 
 /// @nodoc
-abstract class _$$_BottomNavCubitStateCopyWith<$Res>
+abstract class _$$BottomNavCubitStateImplCopyWith<$Res>
     implements $BottomNavCubitStateCopyWith<$Res> {
-  factory _$$_BottomNavCubitStateCopyWith(_$_BottomNavCubitState value,
-          $Res Function(_$_BottomNavCubitState) then) =
-      __$$_BottomNavCubitStateCopyWithImpl<$Res>;
+  factory _$$BottomNavCubitStateImplCopyWith(_$BottomNavCubitStateImpl value,
+          $Res Function(_$BottomNavCubitStateImpl) then) =
+      __$$BottomNavCubitStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int currentPageIndex});
 }
 
 /// @nodoc
-class __$$_BottomNavCubitStateCopyWithImpl<$Res>
-    extends _$BottomNavCubitStateCopyWithImpl<$Res, _$_BottomNavCubitState>
-    implements _$$_BottomNavCubitStateCopyWith<$Res> {
-  __$$_BottomNavCubitStateCopyWithImpl(_$_BottomNavCubitState _value,
-      $Res Function(_$_BottomNavCubitState) _then)
+class __$$BottomNavCubitStateImplCopyWithImpl<$Res>
+    extends _$BottomNavCubitStateCopyWithImpl<$Res, _$BottomNavCubitStateImpl>
+    implements _$$BottomNavCubitStateImplCopyWith<$Res> {
+  __$$BottomNavCubitStateImplCopyWithImpl(_$BottomNavCubitStateImpl _value,
+      $Res Function(_$BottomNavCubitStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BottomNavCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? currentPageIndex = null,
   }) {
-    return _then(_$_BottomNavCubitState(
+    return _then(_$BottomNavCubitStateImpl(
       currentPageIndex: null == currentPageIndex
           ? _value.currentPageIndex
           : currentPageIndex // ignore: cast_nullable_to_non_nullable
@@ -91,8 +97,8 @@ class __$$_BottomNavCubitStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BottomNavCubitState implements _BottomNavCubitState {
-  _$_BottomNavCubitState({required this.currentPageIndex});
+class _$BottomNavCubitStateImpl implements _BottomNavCubitState {
+  _$BottomNavCubitStateImpl({required this.currentPageIndex});
 
   @override
   final int currentPageIndex;
@@ -103,10 +109,10 @@ class _$_BottomNavCubitState implements _BottomNavCubitState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BottomNavCubitState &&
+            other is _$BottomNavCubitStateImpl &&
             (identical(other.currentPageIndex, currentPageIndex) ||
                 other.currentPageIndex == currentPageIndex));
   }
@@ -114,22 +120,27 @@ class _$_BottomNavCubitState implements _BottomNavCubitState {
   @override
   int get hashCode => Object.hash(runtimeType, currentPageIndex);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BottomNavCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BottomNavCubitStateCopyWith<_$_BottomNavCubitState> get copyWith =>
-      __$$_BottomNavCubitStateCopyWithImpl<_$_BottomNavCubitState>(
+  _$$BottomNavCubitStateImplCopyWith<_$BottomNavCubitStateImpl> get copyWith =>
+      __$$BottomNavCubitStateImplCopyWithImpl<_$BottomNavCubitStateImpl>(
           this, _$identity);
 }
 
 abstract class _BottomNavCubitState implements BottomNavCubitState {
   factory _BottomNavCubitState({required final int currentPageIndex}) =
-      _$_BottomNavCubitState;
+      _$BottomNavCubitStateImpl;
 
   @override
   int get currentPageIndex;
+
+  /// Create a copy of BottomNavCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_BottomNavCubitStateCopyWith<_$_BottomNavCubitState> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BottomNavCubitStateImplCopyWith<_$BottomNavCubitStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

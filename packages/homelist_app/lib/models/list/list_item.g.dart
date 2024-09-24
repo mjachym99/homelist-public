@@ -8,14 +8,15 @@ part of 'list_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ListItem _$$_ListItemFromJson(Map<String, dynamic> json) => _$_ListItem(
+_$ListItemImpl _$$ListItemImplFromJson(Map<String, dynamic> json) =>
+    _$ListItemImpl(
       id: json['id'] as String,
       title: json['title'] as String,
       completed: json['completed'] as bool,
       iconName: $enumDecodeNullable(_$IconNamesEnumMap, json['iconName']),
     );
 
-Map<String, dynamic> _$$_ListItemToJson(_$_ListItem instance) =>
+Map<String, dynamic> _$$ListItemImplToJson(_$ListItemImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

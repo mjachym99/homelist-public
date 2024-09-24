@@ -8,7 +8,8 @@ part of 'expense.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Expense _$$_ExpenseFromJson(Map<String, dynamic> json) => _$_Expense(
+_$ExpenseImpl _$$ExpenseImplFromJson(Map<String, dynamic> json) =>
+    _$ExpenseImpl(
       id: json['id'] as String,
       title: json['title'] as String,
       amount: (json['amount'] as num).toDouble(),
@@ -19,7 +20,7 @@ _$_Expense _$$_ExpenseFromJson(Map<String, dynamic> json) => _$_Expense(
       expenseGroupId: json['expenseGroupId'] as String,
     );
 
-Map<String, dynamic> _$$_ExpenseToJson(_$_Expense instance) =>
+Map<String, dynamic> _$$ExpenseImplToJson(_$ExpenseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

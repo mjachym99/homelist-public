@@ -12,7 +12,7 @@ part of 'budget_cubit_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BudgetCubitState {
@@ -23,7 +23,9 @@ mixin _$BudgetCubitState {
   ExpenseGroup? get currentExpenseGroup => throw _privateConstructorUsedError;
   Expense? get currentExpense => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BudgetCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BudgetCubitStateCopyWith<BudgetCubitState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +57,8 @@ class _$BudgetCubitStateCopyWithImpl<$Res, $Val extends BudgetCubitState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BudgetCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,6 +92,8 @@ class _$BudgetCubitStateCopyWithImpl<$Res, $Val extends BudgetCubitState>
     ) as $Val);
   }
 
+  /// Create a copy of BudgetCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ExpenseGroupCopyWith<$Res>? get currentExpenseGroup {
@@ -100,6 +106,8 @@ class _$BudgetCubitStateCopyWithImpl<$Res, $Val extends BudgetCubitState>
     });
   }
 
+  /// Create a copy of BudgetCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ExpenseCopyWith<$Res>? get currentExpense {
@@ -114,11 +122,11 @@ class _$BudgetCubitStateCopyWithImpl<$Res, $Val extends BudgetCubitState>
 }
 
 /// @nodoc
-abstract class _$$_BudgetCubitStateCopyWith<$Res>
+abstract class _$$BudgetCubitStateImplCopyWith<$Res>
     implements $BudgetCubitStateCopyWith<$Res> {
-  factory _$$_BudgetCubitStateCopyWith(
-          _$_BudgetCubitState value, $Res Function(_$_BudgetCubitState) then) =
-      __$$_BudgetCubitStateCopyWithImpl<$Res>;
+  factory _$$BudgetCubitStateImplCopyWith(_$BudgetCubitStateImpl value,
+          $Res Function(_$BudgetCubitStateImpl) then) =
+      __$$BudgetCubitStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -135,13 +143,15 @@ abstract class _$$_BudgetCubitStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BudgetCubitStateCopyWithImpl<$Res>
-    extends _$BudgetCubitStateCopyWithImpl<$Res, _$_BudgetCubitState>
-    implements _$$_BudgetCubitStateCopyWith<$Res> {
-  __$$_BudgetCubitStateCopyWithImpl(
-      _$_BudgetCubitState _value, $Res Function(_$_BudgetCubitState) _then)
+class __$$BudgetCubitStateImplCopyWithImpl<$Res>
+    extends _$BudgetCubitStateCopyWithImpl<$Res, _$BudgetCubitStateImpl>
+    implements _$$BudgetCubitStateImplCopyWith<$Res> {
+  __$$BudgetCubitStateImplCopyWithImpl(_$BudgetCubitStateImpl _value,
+      $Res Function(_$BudgetCubitStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BudgetCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,7 +161,7 @@ class __$$_BudgetCubitStateCopyWithImpl<$Res>
     Object? currentExpenseGroup = freezed,
     Object? currentExpense = freezed,
   }) {
-    return _then(_$_BudgetCubitState(
+    return _then(_$BudgetCubitStateImpl(
       allExpenseGroups: null == allExpenseGroups
           ? _value._allExpenseGroups
           : allExpenseGroups // ignore: cast_nullable_to_non_nullable
@@ -178,8 +188,8 @@ class __$$_BudgetCubitStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BudgetCubitState implements _BudgetCubitState {
-  _$_BudgetCubitState(
+class _$BudgetCubitStateImpl implements _BudgetCubitState {
+  _$BudgetCubitStateImpl(
       {required final List<ExpenseGroup> allExpenseGroups,
       required final List<Expense> allCurrentUserExpenses,
       required this.allExpenseGroupsStatus,
@@ -219,10 +229,10 @@ class _$_BudgetCubitState implements _BudgetCubitState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BudgetCubitState &&
+            other is _$BudgetCubitStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._allExpenseGroups, _allExpenseGroups) &&
             const DeepCollectionEquality().equals(
@@ -244,11 +254,14 @@ class _$_BudgetCubitState implements _BudgetCubitState {
       currentExpenseGroup,
       currentExpense);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BudgetCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BudgetCubitStateCopyWith<_$_BudgetCubitState> get copyWith =>
-      __$$_BudgetCubitStateCopyWithImpl<_$_BudgetCubitState>(this, _$identity);
+  _$$BudgetCubitStateImplCopyWith<_$BudgetCubitStateImpl> get copyWith =>
+      __$$BudgetCubitStateImplCopyWithImpl<_$BudgetCubitStateImpl>(
+          this, _$identity);
 }
 
 abstract class _BudgetCubitState implements BudgetCubitState {
@@ -257,7 +270,7 @@ abstract class _BudgetCubitState implements BudgetCubitState {
       required final List<Expense> allCurrentUserExpenses,
       required final Status allExpenseGroupsStatus,
       final ExpenseGroup? currentExpenseGroup,
-      final Expense? currentExpense}) = _$_BudgetCubitState;
+      final Expense? currentExpense}) = _$BudgetCubitStateImpl;
 
   @override
   List<ExpenseGroup> get allExpenseGroups;
@@ -269,8 +282,11 @@ abstract class _BudgetCubitState implements BudgetCubitState {
   ExpenseGroup? get currentExpenseGroup;
   @override
   Expense? get currentExpense;
+
+  /// Create a copy of BudgetCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_BudgetCubitStateCopyWith<_$_BudgetCubitState> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BudgetCubitStateImplCopyWith<_$BudgetCubitStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'auth_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AuthState {
@@ -20,8 +20,12 @@ mixin _$AuthState {
   bool get staySignedIn => throw _privateConstructorUsedError;
   Status get authStatus => throw _privateConstructorUsedError;
   bool get signUp => throw _privateConstructorUsedError;
+  AuthRepositoryException? get authException =>
+      throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AuthStateCopyWith<AuthState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -35,7 +39,8 @@ abstract class $AuthStateCopyWith<$Res> {
       {bool isAuthenticated,
       bool staySignedIn,
       Status authStatus,
-      bool signUp});
+      bool signUp,
+      AuthRepositoryException? authException});
 }
 
 /// @nodoc
@@ -48,6 +53,8 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -55,6 +62,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? staySignedIn = null,
     Object? authStatus = null,
     Object? signUp = null,
+    Object? authException = freezed,
   }) {
     return _then(_value.copyWith(
       isAuthenticated: null == isAuthenticated
@@ -73,32 +81,40 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.signUp
           : signUp // ignore: cast_nullable_to_non_nullable
               as bool,
+      authException: freezed == authException
+          ? _value.authException
+          : authException // ignore: cast_nullable_to_non_nullable
+              as AuthRepositoryException?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
-  factory _$$_AuthStateCopyWith(
-          _$_AuthState value, $Res Function(_$_AuthState) then) =
-      __$$_AuthStateCopyWithImpl<$Res>;
+abstract class _$$AuthStateImplCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory _$$AuthStateImplCopyWith(
+          _$AuthStateImpl value, $Res Function(_$AuthStateImpl) then) =
+      __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {bool isAuthenticated,
       bool staySignedIn,
       Status authStatus,
-      bool signUp});
+      bool signUp,
+      AuthRepositoryException? authException});
 }
 
 /// @nodoc
-class __$$_AuthStateCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_AuthState>
-    implements _$$_AuthStateCopyWith<$Res> {
-  __$$_AuthStateCopyWithImpl(
-      _$_AuthState _value, $Res Function(_$_AuthState) _then)
+class __$$AuthStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateImpl>
+    implements _$$AuthStateImplCopyWith<$Res> {
+  __$$AuthStateImplCopyWithImpl(
+      _$AuthStateImpl _value, $Res Function(_$AuthStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,8 +122,9 @@ class __$$_AuthStateCopyWithImpl<$Res>
     Object? staySignedIn = null,
     Object? authStatus = null,
     Object? signUp = null,
+    Object? authException = freezed,
   }) {
-    return _then(_$_AuthState(
+    return _then(_$AuthStateImpl(
       isAuthenticated: null == isAuthenticated
           ? _value.isAuthenticated
           : isAuthenticated // ignore: cast_nullable_to_non_nullable
@@ -124,18 +141,23 @@ class __$$_AuthStateCopyWithImpl<$Res>
           ? _value.signUp
           : signUp // ignore: cast_nullable_to_non_nullable
               as bool,
+      authException: freezed == authException
+          ? _value.authException
+          : authException // ignore: cast_nullable_to_non_nullable
+              as AuthRepositoryException?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AuthState implements _AuthState {
-  const _$_AuthState(
+class _$AuthStateImpl implements _AuthState {
+  const _$AuthStateImpl(
       {required this.isAuthenticated,
       required this.staySignedIn,
       required this.authStatus,
-      required this.signUp});
+      required this.signUp,
+      this.authException});
 
   @override
   final bool isAuthenticated;
@@ -145,35 +167,41 @@ class _$_AuthState implements _AuthState {
   final Status authStatus;
   @override
   final bool signUp;
+  @override
+  final AuthRepositoryException? authException;
 
   @override
   String toString() {
-    return 'AuthState(isAuthenticated: $isAuthenticated, staySignedIn: $staySignedIn, authStatus: $authStatus, signUp: $signUp)';
+    return 'AuthState(isAuthenticated: $isAuthenticated, staySignedIn: $staySignedIn, authStatus: $authStatus, signUp: $signUp, authException: $authException)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AuthState &&
+            other is _$AuthStateImpl &&
             (identical(other.isAuthenticated, isAuthenticated) ||
                 other.isAuthenticated == isAuthenticated) &&
             (identical(other.staySignedIn, staySignedIn) ||
                 other.staySignedIn == staySignedIn) &&
             (identical(other.authStatus, authStatus) ||
                 other.authStatus == authStatus) &&
-            (identical(other.signUp, signUp) || other.signUp == signUp));
+            (identical(other.signUp, signUp) || other.signUp == signUp) &&
+            (identical(other.authException, authException) ||
+                other.authException == authException));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isAuthenticated, staySignedIn, authStatus, signUp);
+  int get hashCode => Object.hash(runtimeType, isAuthenticated, staySignedIn,
+      authStatus, signUp, authException);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
-      __$$_AuthStateCopyWithImpl<_$_AuthState>(this, _$identity);
+  _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>
+      __$$AuthStateImplCopyWithImpl<_$AuthStateImpl>(this, _$identity);
 }
 
 abstract class _AuthState implements AuthState {
@@ -181,7 +209,8 @@ abstract class _AuthState implements AuthState {
       {required final bool isAuthenticated,
       required final bool staySignedIn,
       required final Status authStatus,
-      required final bool signUp}) = _$_AuthState;
+      required final bool signUp,
+      final AuthRepositoryException? authException}) = _$AuthStateImpl;
 
   @override
   bool get isAuthenticated;
@@ -192,7 +221,12 @@ abstract class _AuthState implements AuthState {
   @override
   bool get signUp;
   @override
-  @JsonKey(ignore: true)
-  _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
+  AuthRepositoryException? get authException;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

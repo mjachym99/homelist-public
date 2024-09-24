@@ -12,7 +12,7 @@ part of 'shared_list_cubit_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SharedListCubitState {
@@ -24,7 +24,9 @@ mixin _$SharedListCubitState {
   Status get sharedListsStatus => throw _privateConstructorUsedError;
   Status get currentListStatus => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SharedListCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SharedListCubitStateCopyWith<SharedListCubitState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +60,8 @@ class _$SharedListCubitStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SharedListCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,6 +105,8 @@ class _$SharedListCubitStateCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of SharedListCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SharedListCopyWith<$Res>? get currentList {
@@ -115,11 +121,11 @@ class _$SharedListCubitStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SharedListCubitStateCopyWith<$Res>
+abstract class _$$SharedListCubitStateImplCopyWith<$Res>
     implements $SharedListCubitStateCopyWith<$Res> {
-  factory _$$_SharedListCubitStateCopyWith(_$_SharedListCubitState value,
-          $Res Function(_$_SharedListCubitState) then) =
-      __$$_SharedListCubitStateCopyWithImpl<$Res>;
+  factory _$$SharedListCubitStateImplCopyWith(_$SharedListCubitStateImpl value,
+          $Res Function(_$SharedListCubitStateImpl) then) =
+      __$$SharedListCubitStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -136,13 +142,15 @@ abstract class _$$_SharedListCubitStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SharedListCubitStateCopyWithImpl<$Res>
-    extends _$SharedListCubitStateCopyWithImpl<$Res, _$_SharedListCubitState>
-    implements _$$_SharedListCubitStateCopyWith<$Res> {
-  __$$_SharedListCubitStateCopyWithImpl(_$_SharedListCubitState _value,
-      $Res Function(_$_SharedListCubitState) _then)
+class __$$SharedListCubitStateImplCopyWithImpl<$Res>
+    extends _$SharedListCubitStateCopyWithImpl<$Res, _$SharedListCubitStateImpl>
+    implements _$$SharedListCubitStateImplCopyWith<$Res> {
+  __$$SharedListCubitStateImplCopyWithImpl(_$SharedListCubitStateImpl _value,
+      $Res Function(_$SharedListCubitStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SharedListCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,7 +162,7 @@ class __$$_SharedListCubitStateCopyWithImpl<$Res>
     Object? sharedListsStatus = null,
     Object? currentListStatus = null,
   }) {
-    return _then(_$_SharedListCubitState(
+    return _then(_$SharedListCubitStateImpl(
       allLists: null == allLists
           ? _value._allLists
           : allLists // ignore: cast_nullable_to_non_nullable
@@ -189,8 +197,8 @@ class __$$_SharedListCubitStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SharedListCubitState extends _SharedListCubitState {
-  _$_SharedListCubitState(
+class _$SharedListCubitStateImpl extends _SharedListCubitState {
+  _$SharedListCubitStateImpl(
       {required final List<SharedList> allLists,
       required final List<SharedList> sharedLists,
       required final List<UserData> usersToShare,
@@ -242,10 +250,10 @@ class _$_SharedListCubitState extends _SharedListCubitState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SharedListCubitState &&
+            other is _$SharedListCubitStateImpl &&
             const DeepCollectionEquality().equals(other._allLists, _allLists) &&
             const DeepCollectionEquality()
                 .equals(other._sharedLists, _sharedLists) &&
@@ -272,12 +280,15 @@ class _$_SharedListCubitState extends _SharedListCubitState {
       sharedListsStatus,
       currentListStatus);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SharedListCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SharedListCubitStateCopyWith<_$_SharedListCubitState> get copyWith =>
-      __$$_SharedListCubitStateCopyWithImpl<_$_SharedListCubitState>(
-          this, _$identity);
+  _$$SharedListCubitStateImplCopyWith<_$SharedListCubitStateImpl>
+      get copyWith =>
+          __$$SharedListCubitStateImplCopyWithImpl<_$SharedListCubitStateImpl>(
+              this, _$identity);
 }
 
 abstract class _SharedListCubitState extends SharedListCubitState {
@@ -288,7 +299,7 @@ abstract class _SharedListCubitState extends SharedListCubitState {
       required final SharedList? currentList,
       required final Status allListsStatus,
       required final Status sharedListsStatus,
-      required final Status currentListStatus}) = _$_SharedListCubitState;
+      required final Status currentListStatus}) = _$SharedListCubitStateImpl;
   _SharedListCubitState._() : super._();
 
   @override
@@ -305,8 +316,11 @@ abstract class _SharedListCubitState extends SharedListCubitState {
   Status get sharedListsStatus;
   @override
   Status get currentListStatus;
+
+  /// Create a copy of SharedListCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_SharedListCubitStateCopyWith<_$_SharedListCubitState> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SharedListCubitStateImplCopyWith<_$SharedListCubitStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

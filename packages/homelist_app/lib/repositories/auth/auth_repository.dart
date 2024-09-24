@@ -1,13 +1,34 @@
 import 'dart:developer';
 
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+class AuthRepositoryException implements Exception {
+  AuthRepositoryException(this.error);
+
+  final Object? error;
+}
+
+class CreateUserFailure extends AuthRepositoryException {
+  CreateUserFailure(super.error);
+}
+
+class UserNotFound extends AuthRepositoryException {
+  UserNotFound(super.error);
+}
+
+class WrongPassword extends AuthRepositoryException {
+  WrongPassword(super.error);
+}
 
 class AuthRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  /// Upon successful login, User object is sent to all listeners.
+  /// On log out, null is sent to all listeners
   final Stream<User?> userStream = FirebaseAuth.instance.authStateChanges();
 
-  Future<UserCredential?> logIn({
+  Future<Either<AuthRepositoryException, UserCredential?>> logIn({
     required String email,
     required String password,
   }) async {
@@ -17,17 +38,16 @@ class AuthRepository {
         email: email,
         password: password,
       );
+      return Right(credential);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        log('No user found for that email.');
+        return Left(UserNotFound(e.message));
       } else if (e.code == 'wrong-password') {
-        log('Wrong password provided for that user.');
+        return Left(WrongPassword(e.message));
       } else {
-        log(e.message.toString());
+        return Left(AuthRepositoryException(e.message));
       }
     }
-
-    return credential;
   }
 
   Future<void> signOut() {
