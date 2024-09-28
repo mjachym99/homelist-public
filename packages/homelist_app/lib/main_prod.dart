@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:homelist/app.dart';
 import 'package:homelist/application/core/preferences.dart';
@@ -13,7 +15,12 @@ void main() async {
 
   await PreferencesController.initialise();
 
+  if (kIsWeb) {
+    await FirebaseAuth.instance.setPersistence(Persistence.NONE);
+  }
+
   setupGetIt();
+
   runApp(const HomeList());
 }
 

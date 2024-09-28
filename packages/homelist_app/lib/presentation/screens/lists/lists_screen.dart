@@ -24,9 +24,8 @@ class ListsScreen extends StatelessWidget {
                 )
               : SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
@@ -34,7 +33,7 @@ class ListsScreen extends StatelessWidget {
                         ),
                         _ListsWidget(
                           lists: listsState.todoLists,
-                          title: "Your Todo Lists",
+                          title: 'Your Todo Lists',
                           listsType: ListsType.todo,
                         ),
                         const SizedBox(
@@ -49,7 +48,7 @@ class ListsScreen extends StatelessWidget {
                         ),
                         _ListsWidget(
                           lists: listsState.shoppingLists,
-                          title: "Your Shopping Lists",
+                          title: 'Your Shopping Lists',
                           listsType: ListsType.shopping,
                         ),
                         const SizedBox(
@@ -64,7 +63,7 @@ class ListsScreen extends StatelessWidget {
                         ),
                         _ListsWidget(
                           lists: listsState.sharedLists,
-                          title: "Lists Shared with You",
+                          title: 'Lists Shared with You',
                           listsType: ListsType.shared,
                         ),
                       ],

@@ -35,7 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeListAppBar(
-        title: "Sign Up",
+        title: 'Sign Up',
         leading: IconButton(
           onPressed: () {
             context.go(LoginScreen.routeName);
@@ -162,9 +162,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 16,
               ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20),
                 child: Row(
-                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
                       child: ElevatedButton(
@@ -178,12 +177,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 );
                           }
                         },
-                        child: const Text("Sign Up"),
+                        child: const Text('Sign Up'),
                       ),
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

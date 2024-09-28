@@ -29,7 +29,7 @@ class AuthCubit extends Cubit<AuthState> {
           );
         } else {
           // Emit succesful auth state + get user data from firestore
-          await _getUserData(user);
+          await getUserData(user);
         }
       },
     );
@@ -67,7 +67,7 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  Future<void> _getUserData(User user) async {
+  Future<void> getUserData(User user) async {
     await _usersRepository.getUserData(user.uid);
     emit(
       state.copyWith(
@@ -82,6 +82,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(state.copyWith(authStatus: Status.initial));
   }
 
+  // Redundant
   void initialiseStaySignedIn() {
     final SharedPreferences prefs = PreferencesController.preferencesInstance;
     final bool? ssi = prefs.getBool('staySignedIn');
@@ -92,8 +93,13 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  // Only for web
   void setStaySignedIn({required bool value}) {
-    PreferencesController.preferencesInstance.setBool(_staySignedInPrefsKey, value);
+    if (value) {
+      FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+    } else {
+      FirebaseAuth.instance.setPersistence(Persistence.NONE);
+    }
     emit(state.copyWith(staySignedIn: value));
   }
 

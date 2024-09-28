@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +8,6 @@ import 'package:homelist/application/core/navigation.dart';
 import 'package:homelist/application/core/preferences.dart';
 import 'package:homelist/application/status.dart';
 import 'package:homelist/presentation/screens/login/sign_up_screen.dart';
-import 'package:homelist/repositories/auth/auth_repository.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,11 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final emailController = TextEditingController.fromValue(
-    const TextEditingValue(),
+    TextEditingValue.empty,
   );
 
   final passwordController = TextEditingController.fromValue(
-    const TextEditingValue(),
+    TextEditingValue.empty,
   );
 
   @override
@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               Expanded(
-                flex: 12,
+                flex: 10,
                 child: Container(),
               ),
               Text(
@@ -110,24 +110,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      BlocBuilder<AuthCubit, AuthState>(
-                        builder: (context, state) {
-                          return Checkbox(
-                            value: state.staySignedIn,
-                            onChanged: (value) {
-                              if (value != null) {
-                                context.read<AuthCubit>().setStaySignedIn(value: value);
-                              }
-                            },
-                          );
-                        },
-                      ),
-                      const Text('Remember credentials?'),
-                    ],
-                  ),
+                  if (kIsWeb)
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        BlocBuilder<AuthCubit, AuthState>(
+                          builder: (context, state) {
+                            return Checkbox(
+                              value: state.staySignedIn,
+                              onChanged: (value) {
+                                if (value != null) {
+                                  context.read<AuthCubit>().setStaySignedIn(value: value);
+                                }
+                              },
+                            );
+                          },
+                        ),
+                        const Text('Keep me logged in.'),
+                      ],
+                    ),
                 ],
               ),
               const SizedBox(
@@ -153,15 +154,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: BlocConsumer<AuthCubit, AuthState>(
                   listenWhen: (previous, current) {
-                    // Don't listen when the user changes remembering credentials
+                    // Don't listen when the user toggles remembering credentials
                     return previous.staySignedIn == current.staySignedIn;
                   },
                   listener: (context, state) {
-                    if (state.authStatus == Status.error)
+                    if (state.authStatus == Status.error) {
                       NavigationService.showErrorSnackbar(
                         context,
                         state.authException?.error,
                       );
+                    }
                   },
                   builder: (context, state) {
                     return Row(

@@ -17,7 +17,7 @@ import 'package:homelist/presentation/widgets/common/homelist_appbar.dart';
 import 'package:homelist/presentation/widgets/lists/add_list_widget.dart';
 
 class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({super.key, required this.title});
+  const NavigationScreen({required this.title, super.key});
 
   static const routeName = '/';
 
@@ -62,8 +62,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  final currentIndex =
-                      context.read<BottomNavCubit>().state.currentPageIndex;
+                  final currentIndex = context.read<BottomNavCubit>().state.currentPageIndex;
                   if (currentIndex == 0) {
                     showDialog<AddListForm>(
                       context: context,
@@ -84,24 +83,22 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 shape: const CircleBorder(),
                 child: const Icon(Icons.add),
               ),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.miniEndFloat,
-              bottomNavigationBar:
-                  BlocBuilder<BottomNavCubit, BottomNavCubitState>(
+              floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+              bottomNavigationBar: BlocBuilder<BottomNavCubit, BottomNavCubitState>(
                 builder: (context, navState) {
                   return NavigationBar(
                     destinations: const [
                       NavigationDestination(
                         icon: Icon(Icons.list),
-                        label: "Lists",
+                        label: 'Lists',
                       ),
                       NavigationDestination(
                         icon: Icon(Icons.attach_money),
-                        label: "Budget",
+                        label: 'Budget',
                       ),
                       NavigationDestination(
                         icon: Icon(Icons.calendar_month_outlined),
-                        label: "Calendar",
+                        label: 'Calendar',
                       ),
                     ],
                     selectedIndex: navState.currentPageIndex,
@@ -113,16 +110,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
                         context.read<SharedListCubit>().loadUserListsStream(
                               context.read<UserCubit>().state.userData!.id,
                             );
-                        context
-                            .read<SharedListCubit>()
-                            .loadListsSharedWithUserStream(
+                        context.read<SharedListCubit>().loadListsSharedWithUserStream(
                               context.read<UserCubit>().state.userData!.id,
                             );
                       }
                       if (index == BottomNavPage.budget.getPageIndex()) {
-                        context
-                            .read<BudgetCubit>()
-                            .listenToAllExpenseGroupsStream(
+                        context.read<BudgetCubit>().listenToAllExpenseGroupsStream(
                               context.read<UserCubit>().state.userData!,
                             );
                       }

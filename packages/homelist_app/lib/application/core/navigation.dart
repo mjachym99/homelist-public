@@ -7,6 +7,7 @@ import 'package:homelist/presentation/screens/budget/expense_details_screen.dart
 import 'package:homelist/presentation/screens/budget/expense_group_screen.dart';
 import 'package:homelist/presentation/screens/lists/list_details_screen.dart';
 import 'package:homelist/presentation/screens/login/log_in_screen.dart';
+import 'package:homelist/presentation/screens/login/prelogin_screen.dart';
 import 'package:homelist/presentation/screens/login/sign_up_screen.dart';
 import 'package:homelist/presentation/screens/navigation/navigation_screen.dart';
 import 'package:homelist/presentation/widgets/budget/add_expense_form.dart';
@@ -53,8 +54,10 @@ class NavigationService {
       switch (state.matchedLocation) {
         case '/sign-up':
           return SignUpScreen.routeName;
+        case '/login':
+          return LoginScreen.routeName;
         default:
-          return '/login';
+          return '/prelogin';
       }
     }
   }
@@ -77,6 +80,11 @@ class NavigationService {
   }
 
   static final allRoutes = [
+    GoRoute(
+      name: 'Prelogin',
+      path: PreloginScreen.routeName,
+      builder: (context, state) => const PreloginScreen(),
+    ),
     GoRoute(
       name: 'Login',
       path: LoginScreen.routeName,
