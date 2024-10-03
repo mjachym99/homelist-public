@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homelist/application/auth/auth_cubit.dart';
+import 'package:homelist/application/auth/auth_state.dart';
 import 'package:homelist/application/core/navigation.dart';
+import 'package:homelist/application/status.dart';
 import 'package:homelist/presentation/constants.dart';
 import 'package:homelist/presentation/screens/login/log_in_screen.dart';
 import 'package:homelist/presentation/widgets/common/homelist_appbar.dart';
@@ -166,18 +168,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            context.read<AuthCubit>().createUserWithEmailAndPassword(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                  firstName: _firstNameController.text,
-                                  lastName: _lastNameController.text,
-                                );
+                      child: BlocConsumer<AuthCubit, AuthState>(
+                        listener: (context, state) {
+                          if (state.authStatus == Status.error) {
+                            NavigationService.showErrorSnackbar(
+                              context,
+                              state.authException?.error,
+                            );
                           }
                         },
-                        child: const Text('Sign Up'),
+                        builder: (context, state) {
+                          return ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                await context.read<AuthCubit>().createUser(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                      firstName: _firstNameController.text,
+                                      lastName: _lastNameController.text,
+                                    );
+                              }
+                            },
+                            child: state.authStatus == Status.loading
+                                ? const SizedBox(
+                                    height: 12,
+                                    width: 12,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                : const Text('Sign Up'),
+                          );
+                        },
                       ),
                     ),
                   ],

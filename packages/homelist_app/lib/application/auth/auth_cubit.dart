@@ -114,7 +114,7 @@ class AuthCubit extends Cubit<AuthState> {
     _firebaseUserStreamSubscription.cancel();
   }
 
-  Future<void> createUserWithEmailAndPassword({
+  Future<void> createUser({
     required String email,
     required String password,
     required String firstName,
@@ -123,19 +123,25 @@ class AuthCubit extends Cubit<AuthState> {
     emit(
       state.copyWith(authStatus: Status.loading),
     );
-    try {
-      final UserCredential? userData =
-          await _authRepository.createUserWithEmailAndPassword(email, password);
-      final UserData newUser = UserData(
-        id: userData!.user!.uid,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-      );
-      await _usersRepository.createUser(newUser);
-      await authenticate(email: email, password: password);
-    } catch (e, stackTrace) {
-      addError(e, stackTrace);
-    }
+    final result = await _usersRepository.createUser(
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      password: password,
+    );
+
+    result.fold(
+      (error) {
+        emit(
+          state.copyWith(
+            authStatus: Status.error,
+            authException: AuthRepositoryException(error.error),
+          ),
+        );
+      },
+      (result) {
+        authenticate(email: email, password: password);
+      },
+    );
   }
 }

@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:user_repository/user_repository.dart';
 
@@ -34,12 +35,27 @@ class UsersRepository {
 
   final StreamController<UserData?> userDataStream = StreamController<UserData?>();
 
-  Future<void> createUser(UserData userData) async {
+  Future<Either<UsersRepositoryGeneralFailure, Map<String, dynamic>?>> createUser({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+  }) async {
     try {
-      final DocumentReference<Map<String, dynamic>> ref = _usersCollection.doc(userData.id);
-      await ref.set(userData.toJson());
-    } catch (err, stackTrace) {
-      Error.throwWithStackTrace(CreateUserFailure(err), stackTrace);
+      final response = await FirebaseFunctions.instance
+          .httpsCallable('createFirestoreUserHttp')
+          .call<Map<String, dynamic>?>(
+        {
+          'email': email,
+          'password': password,
+          'firstName': firstName,
+          'lastName': lastName,
+          'avatarImage': '',
+        },
+      );
+      return Right(response.data);
+    } on FirebaseFunctionsException catch (err) {
+      return Left(CreateUserFailure(err.message));
     }
   }
 

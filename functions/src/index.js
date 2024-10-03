@@ -44,53 +44,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.makeuppercase = exports.addmessage = void 0;
+exports.createFirestoreUserHttp = void 0;
 // The Cloud Functions for Firebase SDK to create Cloud Functions and triggers.
-var firebase_functions_1 = require("firebase-functions");
-var https_1 = require("firebase-functions/v2/https");
-var firestore_1 = require("firebase-functions/v2/firestore");
 // The Firebase Admin SDK to access Firestore.
-var app_1 = require("firebase-admin/app");
-var firestore_2 = require("firebase-admin/firestore");
-(0, app_1.initializeApp)();
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
-exports.addmessage = (0, https_1.onRequest)(function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var original, writeResult;
+var admin = require("firebase-admin");
+var https_1 = require("firebase-functions/v2/https");
+var auth_1 = require("firebase-admin/auth");
+var firestore_1 = require("firebase-admin/firestore");
+var user_1 = require("./models/user");
+admin.initializeApp();
+exports.createFirestoreUserHttp = (0, https_1.onCall)(function (request) { return __awaiter(void 0, void 0, void 0, function () {
+    var body, newUser, newFirestoreUser, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                original = request.query.text;
-                return [4 /*yield*/, (0, firestore_2.getFirestore)()
-                        .collection("messages")
-                        .add({ original: original })];
+                _a.trys.push([0, 3, , 4]);
+                body = request.data;
+                return [4 /*yield*/, admin.auth().createUser({
+                        displayName: "".concat(body.firstName, " ").concat(body.lastName),
+                        email: body.email,
+                        password: body.password
+                    })];
             case 1:
-                writeResult = _a.sent();
-                // Send back a message that we've successfully written the message
-                response.json({ result: "Message with ID: ".concat(writeResult.id, " added.") });
-                return [2 /*return*/];
+                newUser = _a.sent();
+                newFirestoreUser = {
+                    id: newUser.uid,
+                    firstName: body.firstName,
+                    lastName: body.lastName,
+                    email: body.email,
+                    avatarImage: body.avatarImage
+                };
+                return [4 /*yield*/, (0, firestore_1.getFirestore)().collection(user_1.usersCollectionKey).doc(newUser.uid).set(newFirestoreUser)];
+            case 2:
+                _a.sent();
+                return [2 /*return*/, { message: "User Created Successfully" }];
+            case 3:
+                error_1 = _a.sent();
+                if (error_1 instanceof auth_1.FirebaseAuthError) {
+                    if (error_1.code == 'auth/email-already-exists') {
+                        throw new https_1.HttpsError("already-exists", error_1.message, error_1.code);
+                    }
+                    if (error_1.code == 'auth/invalid-password') {
+                        throw new https_1.HttpsError("invalid-argument", error_1.message, error_1.code);
+                    }
+                }
+                throw new https_1.HttpsError("unknown", error_1.message, error_1);
+            case 4: return [2 /*return*/];
         }
     });
 }); });
-// Listens for new messages added to /messages/:documentId/original
-// and saves an uppercased version of the message
-// to /messages/:documentId/uppercase
-exports.makeuppercase = (0, firestore_1.onDocumentCreated)("/messages/{documentId}", function (event) {
-    // Grab the current value of what was written to Firestore.
-    if (event.data == undefined) {
-        return null;
-    }
-    var original = event.data.data().original;
-    // Access the parameter `{documentId}` with `event.params`
-    firebase_functions_1.logger.log("Uppercasing", event.params.documentId, original);
-    var uppercase = original.toUpperCase();
-    // You must return a Promise when performing
-    // asynchronous tasks inside a function
-    // such as writing to Firestore.
-    // Setting an 'uppercase' field in Firestore document returns a Promise.
-    return event.data.ref.set({ uppercase: uppercase }, { merge: true });
-});
